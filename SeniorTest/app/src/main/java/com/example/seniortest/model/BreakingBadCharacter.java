@@ -4,17 +4,19 @@ import java.io.Serializable;
 import java.util.List;
 
 public class BreakingBadCharacter implements Serializable {
-    public int char_id;
-    public String name;
-    public String birthday;
-    public List<String> occupation;
-    public String img;
-    public String status;
-    public String nickname;
-    public List<Integer> appearance;
-    public String portrayed;
-    public String category;
-    public List<Object> better_call_saul_appearance;
+    private int positionId;
+    private int char_id;
+    private String name;
+    private String birthday;
+    private List<String> occupation;
+    private String img;
+    private String status;
+    private String nickname;
+    private List<Integer> appearance;
+    private String portrayed;
+    private String category;
+    private List<Object> better_call_saul_appearance;
+    private boolean isFavorite;
 
     public BreakingBadCharacter() {
     }
@@ -107,10 +109,27 @@ public class BreakingBadCharacter implements Serializable {
         this.better_call_saul_appearance = better_call_saul_appearance;
     }
 
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
+    }
+
+    public int getPositionId() {
+        return positionId;
+    }
+
+    public void setPositionId(int positionId) {
+        this.positionId = positionId;
+    }
+
     @Override
     public String toString() {
-        return "Character{" +
-                "char_id=" + char_id +
+        return "BreakingBadCharacter{" +
+                "positionId=" + positionId +
+                ", char_id=" + char_id +
                 ", name='" + name + '\'' +
                 ", birthday='" + birthday + '\'' +
                 ", occupation=" + occupation +
@@ -121,6 +140,7 @@ public class BreakingBadCharacter implements Serializable {
                 ", portrayed='" + portrayed + '\'' +
                 ", category='" + category + '\'' +
                 ", better_call_saul_appearance=" + better_call_saul_appearance +
+                ", isFavorite=" + isFavorite +
                 '}';
     }
 }

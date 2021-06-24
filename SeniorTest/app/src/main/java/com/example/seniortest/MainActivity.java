@@ -14,6 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.example.seniortest.dao.FavoriteDB;
 import com.example.seniortest.model.BreakingBadCharacter;
 import com.example.seniortest.svc.rest.BreakingBadRest;
 
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     ListView list;
     public static ArrayList<BreakingBadCharacter> characters = new ArrayList<BreakingBadCharacter>();
+
 
     CharacterAdapater arrayAdapter;
 
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void getBreakingBadCharacters() {
         try{
+            final FavoriteDB favoriteDB = new FavoriteDB(getApplicationContext());
             Log.d("info2","create gson");
             Gson gson = new GsonBuilder()
                     .setLenient()
@@ -86,9 +89,22 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<List<BreakingBadCharacter>> call, Response<List<BreakingBadCharacter>> response) {
                     Log.d("info2","into enqueue " + gson.toJson(response.body()));
+                    int counter =  0;
                     for(BreakingBadCharacter character : response.body()) {
+                        if (favoriteDB.isFavorite(Integer.toString(character.getChar_id()))){
+                            counter ++;
+                            character.setPositionId(counter);
+                            characters.add(character);
 
-                        characters.add(character);
+
+                        }
+                    }
+                    for(BreakingBadCharacter character : response.body()) {
+                        if (!favoriteDB.isFavorite(Integer.toString(character.getChar_id()))){
+                            counter ++;
+                            character.setPositionId(counter);
+                            characters.add(character);
+                        }
                     }
                     Log.d("info2","doing my best tho " + gson.toJson(characters));
                     arrayAdapter.notifyDataSetChanged();
@@ -115,10 +131,12 @@ public class MainActivity extends AppCompatActivity {
            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l){
                 BreakingBadCharacter character = (BreakingBadCharacter) (list.getItemAtPosition(position));
                 Intent showDetail = new Intent(getApplicationContext(),DetailActivity.class);
-                showDetail.putExtra("char_id",character.getChar_id());
+                showDetail.putExtra("positionId",character.getPositionId());
                 startActivity(showDetail);
 
            }
         });
+
+
     }
 }

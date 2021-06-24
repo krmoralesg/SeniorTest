@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="120dp"
+    android:descendantFocusability="blocksDescendants"
     android:background="@color/cardview_shadow_end_color">
 
 
@@ -32,5 +33,13 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="130dp"
         android:text="TextView" />
+
+    <ImageButton
+        android:id="@+id/imageButtonDetail"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+
+        android:src="@drawable/ic_baseline_favorite_border_24" />
 
 </RelativeLayout>
