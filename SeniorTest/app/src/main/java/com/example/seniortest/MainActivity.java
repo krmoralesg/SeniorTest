@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         arrayAdapter = new CharacterAdapater(getApplicationContext(),0,characters);
         Log.d("info2","arrayadapter done");
 
-        Log.d("info2","done getting characters");
+
 
         list.setAdapter(arrayAdapter);
         setUpOnClickListener();
@@ -106,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
                             characters.add(character);
                         }
                     }
-                    Log.d("info2","doing my best tho " + gson.toJson(characters));
                     arrayAdapter.notifyDataSetChanged();
 
                 }

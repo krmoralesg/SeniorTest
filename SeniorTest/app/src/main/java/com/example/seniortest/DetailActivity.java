@@ -56,7 +56,6 @@ public class DetailActivity extends AppCompatActivity {
         }else{
             imageButton.setImageResource(R.drawable.ic_baseline_favorite_border_24);
         }
-        Log.d("info2","nailed it");
 
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
